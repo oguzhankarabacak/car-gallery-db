@@ -1,0 +1,314 @@
+{% extends "layout.html" %}
+
+{% block title %} Cars {% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if cars %}
+    <div class=" col-md-3 overflow-auto">
+
+        <h2 class="text-center">Filter Car</h2>
+
+        <form action="" method="POST" name="filter">
+            <div class="card">
+
+
+
+                <article class="card-group-item">
+                    <header class="card-header bg-info">
+                        <h6 class="title text-light">Brands </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+
+
+
+
+                            <table class="table">
+                                {% for car in cars %}
+                                <tr>
+                                    <td>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="car_brand" value="{{ car.car_brand }}" />
+                                            {{car.car_brand}}
+                                        </label>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+
+
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info">
+                        <h6 class="title text-light">Choose type </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="sedan">
+                                <label class="form-check-label" for="car_type">
+                                    Sedan
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="coupe">
+                                <label class="form-check-label" for="car_type">
+                                    Coupe
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="hatchback">
+                                <label class="form-check-label" for="car_type">
+                                    Hatchback
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="cabrio">
+                                <label class="form-check-label" for="car_type">
+                                    Cabrio
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="station wagon">
+                                <label class="form-check-label" for="car_type">
+                                    Station Wagon
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="suv">
+                                <label class="form-check-label" for="car_type">
+                                    Suv
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="car_type" id="car_type"
+                                    name="car_type" value="pickup">
+                                <label class="form-check-label" for="car_type">
+                                    Pick-Up
+                                </label>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info text-light">
+                        <h6 class="title">Price</h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Min</label>
+                                    <input type="number" class="form-control" id="inputEmail4" placeholder="$" min="0"
+                                        name="min_price">
+                                </div>
+                                <div class="form-group col-md-6 text-right">
+                                    <label>Max</label>
+                                    <input type="number" class="form-control" placeholder="$" min="1000"
+                                        name="max_price">
+                                </div>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info text-light ">
+                        <h6 class="title">Year </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Min (1900)</label>
+                                    <input type="number" class="form-control" id="inputEmail4" 
+                                        min="1900" minlength="4" maxlength="4" max="2022" name="min_year">
+                                </div>
+                                <div class="form-group col-md-6 text-right">
+                                    <label>Max (2022)</label>
+                                    <input type="number" class="form-control" min="1900" max="2022"
+                                        name="max_year">
+                                </div>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info text-light">
+                        <h6 class="title">Fuel </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <form>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="fuel" value="petrol" />
+                                                Petrol
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="fuel" value="diesel" />
+                                                Diesel
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="fuel" value="hybrid" />
+                                                Hybrid
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="fuel" value="electric" />
+                                                Electric
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info text-light">
+                        <h6 class="title">Horsepower </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Min(50 HP)</label>
+                                    <input type="number" class="form-control" id="inputEmail4"  min="50"
+                                        minlength="4" maxlength="4" max="1500" name="min_horsepower">
+                                </div>
+                                <div class="form-group col-md-6 text-right">
+                                    <label>Max(1500 HP)</label>
+                                    <input type="number" class="form-control"  min="50" max="1500"
+                                        name="max_horsepower">
+                                </div>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info text-light">
+                        <h6 class="title">Engine Size</h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Min(500 CC)</label>
+                                    <input type="number" class="form-control" id="inputEmail4" 
+                                        min="500" minlength="4" maxlength="4" max="8000" name="min_engine">
+                                </div>
+                                <div class="form-group col-md-6 text-right">
+                                    <label>Max(8000 CC)</label>
+                                    <input type="number" class="form-control"  min="500" max="8000"
+                                        name="max_engine">
+                                </div>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <article class="card-group-item">
+                    <header class="card-header bg-info">
+                        <h6 class="title text-light">Gearbox </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="gearbox" id="gearbox"
+                                    name="gearbox" value="automatic">
+                                <label class="form-check-label" for="gearbox">
+                                    Automatic
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="gearbox" id="gearbox"
+                                    name="gearbox" value="manual">
+                                <label class="form-check-label" for="gearbox">
+                                    Manual
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" for="gearbox" id="gearbox"
+                                    name="gearbox" value="semi automatic">
+                                <label class="form-check-label" for="gearbox">
+                                    Semi Automatic
+                                </label>
+                            </div>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+                <button type="submit" class="btn btn-danger">Filter</button>
+
+
+            </div> <!-- card.// -->
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="col-md-8">
+        <br><br>
+        {% if is_filter %}
+        <a href="{{ url_for('home_page')}}" class="btn btn-warning">Clean Filter</a>
+        <br>
+        <br>
+        {% endif %}
+        {% if advertisements %}
+        {% for advertisement in advertisements %}
+        <div class="card col-md-12">
+            <h5 class="card-header">dealer: {{advertisement.dealer_name }} &nbsp &nbsp &nbsp city :
+                {{advertisement.city}}
+                &nbsp &nbsp &nbsp price: {{advertisement.price}} $</h5>
+
+            <div class="card-body">
+                <h5 class="card-title">{{advertisement.car_brand}} &nbsp {{advertisement.car_model}}</h5>
+                <p class="card-text">power : {{advertisement.horsepower}} &nbsp &nbsp &nbsp type :
+                    {{advertisement.car_type}} &nbsp &nbsp &nbsp year: {{advertisement.year}}
+                    <br\> &nbsp &nbsp &nbsp
+                     </p>
+                    <p class="card-text"> gearbox : {{advertisement.gearbox}} 
+                        &nbsp
+                        &nbsp engine size : {{advertisement.engine_size}}cc  &nbsp &nbsp fuel: {{advertisement.fuel}}</p>
+                <a href="{{ url_for('ad_detail_page',ad_id=advertisement.ad_id)}}" class="btn btn-primary">Go Detail</a>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-danger" role="alert">
+            Not found Advertisement.
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+<br><br><br><br>
+
+
+
+{% endblock %}

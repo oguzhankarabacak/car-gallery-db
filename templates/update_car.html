@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %} Update Car Stock{% endblock title %}
+
+{% block content %}
+
+
+{% if car %}
+<form action="" method="POST" name="update">
+    <div class="form-group">
+      <label for="car">Car Name</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Car Name" value="{{car.car_brand}} {{car.car_model}}" readonly>
+      <small id="emailHelp" class="form-text text-muted">You cannot change Car model and brand.</small>
+    </div>
+    <article class="card-group-item">
+    <header class="card-header bg-info text-light"> 
+        <h6 class="title">Type </h6> </header>
+    <select class="form-control" name="car_type">
+        <option value="{{car.car_type}}">{{car.car_type}}</option>
+        <option value="sedan">Sedan</option>
+        <option value="coupe">Coupe</option>
+        <option value="hatchback">Hatchback</option>
+        <option value="cabrio">Cabrio</option>
+        <option value="station wagon">Station Wagon</option>
+        <option value="suv">Suv</option>
+        <option value="pickup">Pick-Up</option>
+    </select>
+</article>
+<br>
+    <div class="form-group">
+        <label for="year">Engine Size</label>
+        <input type="number" class="form-control" id="engine" name="engine" value="{{car.engine_size}}" min="500" max="8000" required="required">
+      </div>
+      <div class="form-group">
+        <label for="year">Horsepower</label>
+        <input type="number" class="form-control" id="horsepower"  name="horsepower" value="{{car.horsepower}}" min="10" max="1500" required="required">
+      </div>
+      <article class="card-group-item">
+        <header class="card-header bg-info text-light">
+            <h6 class="title">Fuel </h6>
+        </header>
+        <select class="form-control" name="fuel">
+            <option value="{{car.fuel}}">{{car.fuel}}</option>
+            <option value="diesel">Diesel</option>
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="electric">Electric</option>
+        </select>
+    </article> <!-- card-group-item.// -->
+    <br>
+    <article class="card-group-item">
+        <header class="card-header bg-info">
+            <h6 class="title text-light">Gearbox </h6>
+        </header>
+        <select class="form-control" name="gearbox">
+            <option value="{{car.gearbox}}">{{car.gearbox}}</option>
+            <option value="automatic">Automatic</option>
+            <option value="manual">Manual</option>
+            <option value="semi automatic">Semi Automatic</option>
+        </select>
+        
+    </article> <!-- card-group-item.// -->
+    <br>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endif %}
+
+{% endblock %}

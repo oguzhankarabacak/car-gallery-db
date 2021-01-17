@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %} Admin Page {% endblock title %}
+
+{% block content %}
+<h1>Admin Panel</h1>
+<div class="col-md-6">
+<div class="list-group">
+  
+    <a href="{{url_for('add_new_car')}}" class="list-group-item list-group-item-action list-group-item-danger">New Car</a>
+    <br>
+    <a href="{{url_for('car_stock')}}" class="list-group-item list-group-item-action list-group-item-danger">Car Stock</a>
+    <br>
+    <a href="{{url_for('new_dealer')}}" class="list-group-item list-group-item-action list-group-item-primary">New Dealer</a>
+    <br>
+    <a href="{{url_for('admin_dealer')}}" class="list-group-item list-group-item-action list-group-item-primary">Dealers</a>
+    <br>
+    <a href="{{url_for('admin_advertisements')}}" class="list-group-item list-group-item-action list-group-item-primary">Advertisements</a>
+    <br>
+    <a href="{{url_for('admin_comments')}}" class="list-group-item list-group-item-action list-group-item-success">User Comments</a>
+    <br>
+    <a href="{{url_for('admin_users')}}" class="list-group-item list-group-item-action list-group-item-success">Users</a>
+    
+  </div>
+
+</div>
+{% endblock content %}

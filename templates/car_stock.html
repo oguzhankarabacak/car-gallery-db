@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %} Car Stock {% endblock title %}
+
+{% block content %}
+
+
+{% if cars %}
+<h1>Car Stock</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Car Brand</th>
+        <th scope="col">Car Model</th>
+        <th scope="col">Car Type</th>
+        <th scope="col">Engine Size</th>
+        <th scope="col">Horsepower</th>
+        <th scope="col">Gearbox</th>
+        <th scope="col">Fuel</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+      <tr>
+        <td>{{car.car_brand}}</td>
+        <td>{{car.car_model}}</td>
+        <td>{{car.car_type}}</td>
+        <td>{{car.engine_size}}</td>,
+        <td>{{car.horsepower}}</td>
+        <td>{{car.gearbox}}</td>
+        <td>{{car.fuel}}</td>
+        {% if session.get("admin") %}
+        <td><a class="btn btn-danger" href="{{ url_for('delete_car',car_id=car.car_id)}}" role="button">Delete</a></td>
+        <td><a class="btn btn-primary" href="{{ url_for('update_car',car_id=car.car_id)}}" role="button">Update</a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    You have no car.
+  </div>
+{% endif %}
+
+
+<br><br>
+
+
+
+{% endblock content %}

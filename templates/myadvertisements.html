@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% if session.get('admin') %}
+Advertisements
+{% else %}
+My Advertisement
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+<br> 
+
+
+{% if advertisements %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Car Model</th>
+        {% if session.get("admin") %}
+        <th scope="col">Dealer</th>
+        {% endif %}
+        <th scope="col">Price</th>
+        <th scope="col">Car Year</th>
+        <th scope="col">Advertisement Date</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for advertisement in advertisements %}
+      <tr>
+        <td>{{advertisement.car_brand}} {{advertisement.car_model}}</td>
+        {% if session.get("admin") %}
+        <th scope="col">{{advertisement.dealer_name}}</th>
+        {% endif %}
+        <td>{{advertisement.price}}</td>
+        <td>{{advertisement.year}}</td>
+        <td>{{advertisement.date}}</td>
+        <td><a class="btn btn-info" href="{{ url_for('ad_detail_page',ad_id=advertisement.ad_id)}}" role="button">Detail</a></td>
+        {% if advertisement.from_admin %}
+        {% else %}
+        <td><a class="btn btn-success" href="{{ url_for('sold_add',ad_id=advertisement.ad_id)}}" role="button">Sold</a></td>
+        {% endif %}
+        
+        <td><a class="btn btn-warning" href="{{ url_for('update_add',ad_id=advertisement.ad_id)}}" role="button">Update</a></td>
+        <td><a class="btn btn-danger" href="{{ url_for('delete_add',ad_id=advertisement.ad_id)}}" role="button">Delete</a></td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    You have no advertisements.
+  </div>
+{% endif %}
+
+
+<br><br>
+
+
+
+{% endblock content %}

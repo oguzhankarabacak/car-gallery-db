@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %} Info
+{% endblock title %}
+
+{% block content %}
+{% if dealer %}
+<div class="col-md-6">
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Dealer Name : {{dealer.dealer_name}}</li>
+    <li class="list-group-item">Owner Name : {{dealer.owner_fullname}}</li>
+    <li class="list-group-item">Owner Mail : {{dealer.owner_mail}}</li>
+    <li class="list-group-item">Dealer City : {{dealer.dealer_city}}</li>
+    <li class="list-group-item">Dealer Phone : {{dealer.dealer_phone}}</li>
+    <li class="list-group-item">Total Income : ${{dealer.total_income}}</li>
+    <li class="list-group-item">Number of Cars Sold : {{dealer.number_of_cars_sold}}</li>
+    <li class="list-group-item">Average Point : {{dealer.average_point}}</li>
+  </ul>
+</div>
+{% endif %}
+
+{% endblock content %}

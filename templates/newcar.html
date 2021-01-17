@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %} New Car {% endblock title %}
+
+{% block content %}
+
+<div class="cold-md-8">
+    <form action="" method="POST" name="new_car">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Car Brand</label>
+          <input type="text" class="form-control" id="car_brand" name="car_brand" placeholder="Brand" minlength="3" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Car Model</label>
+            <input type="text" class="form-control" id="car_model" name="car_model" placeholder="Model" required>
+          </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Car Type</label>
+          <select class="form-control" id="car_type" name="car_type">
+            <option value="sedan">Sedan</option>
+            <option value="hatchback">Hatchback</option>
+            <option value="coupe">Coupe</option>
+            <option value="cabrio">Cabrio</option>
+            <option value="station wagon">Station Wagon</option>
+            <option value="suv">SUV</option>
+            <option value="pickup">Pick-Up</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Gearbox</label>
+            <select class="form-control" id="gearbox" name="gearbox">
+              <option value="automatic">Automatic</option>
+              <option value="manual">Manual</option>
+              <option value="semi automatic">Semi Automatic</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Fuel</label>
+            <select class="form-control" id="fuel" name="fuel">
+              <option value="petrol">Petrol</option>
+              <option value="diesel">Diesel</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="electric">Electric</option>
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Engine Size</label>
+            <input type="number" class="form-control" id="engine_size" name="engine_size" placeholder="Engine" minlength="3" maxlength="4" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Horsepower</label>
+            <input type="number" class="form-control" id="horsepower" name="horsepower" placeholder="Horsepower" minlength="2" maxlength="4" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        
+      </form>
+</div>
+
+{% endblock content%}

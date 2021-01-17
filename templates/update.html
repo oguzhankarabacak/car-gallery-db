@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %} Update Advertisement {% endblock title %}
+
+{% block content %}
+
+{% if advertisement %}
+<form action="" method="POST" name="update">
+    <div class="form-group">
+      <label for="car">Car Name</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Car Name" value="{{advertisement.car_brand}} {{advertisement.car_model}}" readonly>
+      <small id="emailHelp" class="form-text text-muted">You cannot change Car model.If you want, you delete this advertisement and give new advertisement</small>
+    </div>
+    <div class="form-group">
+      <label for="price">Car Price</label>
+      <input  class="form-control" id="price" placeholder="Price" type="number" value="{{advertisement.price}}" name="price" required="required">
+    </div>
+    <div class="form-group">
+        <label for="year">Car Year</label>
+        <input type="number" class="form-control" id="year" placeholder="Year" name="year" value="{{advertisement.year}}" min="1900" max="2022" required="required">
+      </div>
+      <div class="form-group">
+        <label for="explanation">Explanation</label>
+        <textarea class="form-control" rows="5" id="explanation" placeholder="Explanation" minlength="20"
+        maxlength="250" name="explanation" required="required">{{advertisement.explanation}}</textarea>
+        <!-- <input type="text" class="form-control" > -->
+        <small class="form-text text-muted">The explanation must be at least 5 , most 250 letters long</small>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endif %}
+{% endblock %}

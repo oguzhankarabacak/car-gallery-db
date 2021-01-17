@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %} Update Dealer {% endblock title %}
+
+{% block content %}
+{% if dealer %}
+<div class="col-md-6">
+    <form action="" method="POST" name="new_dealer">
+        <div class="form-group">
+          <label for="dealer_name">Dealer Name</label>
+          <input type="text" class="form-control" id="dealer_name" name="dealer_name"  placeholder="Dealer Name" required minlength="2" value="{{dealer.dealer_name}}">
+        </div>
+        <div class="form-group">
+            <label for="dealer_name">Owner Name</label>
+            <input type="text" class="form-control" id="owner_fullname" name="owner_fullname"  placeholder="Owner FullName" required minlength="4" 
+            required value="{{dealer.owner_fullname}}">
+          </div>
+        <div class="form-group">
+            <label for="mail">Email address</label>
+            <input type="email" name="mail" class="form-control" id="mail" required aria-describedby="emailHelp" placeholder="Enter email" value="{{dealer.owner_mail}}" readonly> 
+            <small id="emailHelp" class="form-text text-muted">This field cannot change.</small>
+        </div>
+          <div class="form-group">
+            <label for="city" name="city">City </label> <br/>
+            <input type="text" readonly value={{dealer.dealer_city}}>
+            <small id="emailHelp" class="form-text text-muted">This field cannot change.</small>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="number" name="phone" minlength="11" maxlength="11" class="form-control" id="phone" value="{{dealer.dealer_phone}}" >
+          </div>
+        
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input type="password" class="form-control" name="new_password" id="exampleInputPassword1" placeholder="Password" minlength="6">
+        </div>
+        {% if session.get("admin") %}
+            <br>
+        {% else %}
+        <div class="form-group">
+            <label for="password">Current Password</label>
+            <input type="password" class="form-control" name="old_password" id="exampleInputPassword1" placeholder="Current Password">
+          </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+</div>
+{% endif %}
+{% endblock content %}

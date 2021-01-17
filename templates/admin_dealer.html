@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %} Admin Dealer {% endblock title %}
+
+{% block content %}
+
+
+{% if dealers %}
+<h1>Dealers</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Dealer Name</th>
+        <th scope="col">Owner FullName</th>
+        <th scope="col">Owner Mail</th>
+        <th scope="col">Dealer City</th>
+        <th scope="col">Dealer Phone</th>
+        <th scope="col">Total Income</th>
+        <th scope="col">Number of Car Sold</th>
+        <th scope="col">Average Point</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for dealer in dealers %}
+      <tr>
+        <td>{{dealer.dealer_name}}</td>
+        <td>{{dealer.owner_fullname}}</td>
+        <td>{{dealer.owner_mail}}</td>
+        <td>{{dealer.dealer_city}}</td>,
+        <td>{{dealer.dealer_phone}}</td>
+        <td>${{dealer.total_income}}</td>
+        <td>{{dealer.number_of_cars_sold}}</td>
+        <td>{{dealer.average_point}}/5</td>
+        <td><a class="btn btn-info" href="{{url_for('dealer_detail_page',dealer_id=dealer.dealer_id)}}" role="button">Detail</a></td>
+        <td><a class="btn btn-warning" href="{{url_for('update_info_dealer',dealer_id=dealer.dealer_id)}}" role="button">Update</a></td>
+        {% if dealer.is_central %}
+        <td><p class="bg-primary text-light">Cannot Delete Central</p></td>
+        {% else %}
+        <td><a class="btn btn-danger" href="{{ url_for('delete_dealer',dealer_id=dealer.dealer_id)}}" role="button">Delete</a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    You have no advertisements.
+  </div>
+{% endif %}
+
+
+<br><br>
+
+
+
+{% endblock content %}

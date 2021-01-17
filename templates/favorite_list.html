@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Favorite List
+{% endblock title %}
+
+{% block content %}
+<br> 
+
+<h1>Favorite List</h1>
+{% if wish_list %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Car</th>
+        <th scope="col">Price</th>
+        <th scope="col">Car Year</th>
+        <th scope="col">Favorite Date</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for wish in wish_list %}
+      <tr>
+        <td><a href="{{ url_for('ad_detail_page',ad_id=wish.adv_id) }}" class="btn btn-primary" role="button">{{wish.car_brand}} {{wish.car_model}}</a></td>
+        <td>{{wish.car_price}}</td>
+        <td>{{wish.car_year}}</td>
+        <td>{{wish.date}}</td>
+        
+        <td><a class="btn btn-danger" href="{{ url_for('delete_from_favorite',ad_id=wish.adv_id)}}" role="button">Delete</a></td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    You have no Favorite advertisements.
+  </div>
+{% endif %}
+
+
+<br><br>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %} Dealer {% endblock %}
+
+{% block content %}
+<br><br><br>
+{% if dealers %}
+    {% for dealer in dealers %}
+<div class="card col-md-12">
+    <h5 class="card-header">Name: {{dealer.dealer_name }} &nbsp &nbsp &nbsp City : {{dealer.dealer_city}} </h5>
+
+    <div class="card-body">
+        <h5 class="card-title">Owner Name: {{dealer.owner_fullname}} &nbsp  Mail : {{dealer.owner_mail}}  &nbsp  Phone : {{dealer.dealer_phone}}</h5>
+        
+        <a href="{{ url_for('dealer_detail_page',dealer_id=dealer.dealer_id)}}" class="btn btn-info">Show Dealer Advertisements</a>
+    </div>
+</div>
+<br><br><br>
+
+{% endfor %}
+{% endif %} 
+
+{% endblock content%}
+
+<!--  -->

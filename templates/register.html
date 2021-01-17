@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+{% if message %}
+
+{% endif %}
+<form action="" method="POST" name="register">
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email address</label>
+      <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required="required">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label for="fullname" class="form-label">Your Name and Surname</label>
+        <input name="fullname" type="text" class="form-control" id="fullname"  required="required">
+      </div>
+    <div class="mb-3">
+      <label for="password" class="form-label" >Password</label>
+      <input name="password" type="password" class="form-control" id="exampleInputPassword1" required="required">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label" >Confirm Password</label>
+      <input name="confirm" type="password" class="form-control" id="exampleInputPassword1" required="required">
+    </div>
+    
+    <button type="" class="btn btn-primary">Register</button>
+  </form>
+
+  {% endblock content %}

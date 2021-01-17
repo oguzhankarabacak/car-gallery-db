@@ -1,0 +1,181 @@
+{% extends "layout.html" %}
+
+{% block title %} Car Detail {% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<div class="row">
+    <div class="col-md-9">
+
+        <table class="table table-sm" style="padding:10px">
+            <thead>
+                <tr>
+                    <th scope="col">Attribute</th>
+                    <th scope="col">Value</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <th scope="row">dealer_date : </th>
+                    <td>{{adv.date}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">dealer_name : </th>
+                    <td><a href="{{ url_for('dealer_detail_page',dealer_id=adv.dealer_id)}}"
+                            class="btn btn-primary">{{adv.dealer_name}}</a> </td>
+
+                </tr>
+
+                <tr>
+                    <th scope="row">dealer_city : </th>
+                    <td>{{adv.city}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">dealer_phone : </th>
+                    <td>{{adv.dealer_phone}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Car : </th>
+                    <td>{{adv.car_brand}} {{adv.car_model}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Price : </th>
+                    <td>{{adv.price}} $</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Year : </th>
+                    <td>{{adv.year}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Horsepower : </th>
+                    <td>{{adv.horsepower}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Type : </th>
+                    <td>{{adv.car_type}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Gearbox : </th>
+                    <td>{{adv.gearbox}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Engine Size: </th>
+                    <td>{{adv.engine_size}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Fuel : </th>
+                    <td>{{adv.fuel}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3">
+        {% if adv.avg_point %}
+        <h5 class="text-primary">Average Point:{{adv.avg_point}}</h5>
+        {% else%}
+        <h5 class="text-secondary">Not Evaluated</h5>
+        {% endif %}
+        {% if session.get("user_id") %}
+        {% if wish %}
+        <h4 class="text-success">This advertisement is in your Favorite List.</h4>
+        {% else %}
+        <a class="btn btn-danger" href="{{ url_for('add_favorite',adv_id=adv.ad_id)}}" role="button">Add My Favorite
+            List</a>
+        {% endif %}
+        {% elif session.get("dealer_id") %}
+        {% else %}
+        {% endif %}
+
+    </div>
+</div>
+<div class="col-md-9">
+    <h4>Explanation</h4>
+    <p>{{adv.explanation}}</p>
+
+    <br>
+    <br>
+    <br>
+
+    {% if session.get("user_id") %}
+    <h1> Your Comment </h1> <br>
+    <form action="" method="POST" name="add_comment">
+
+        <div class="form-group">
+            <label for="point" required>Your Point : </label>
+            <select class="form-control" id="point_id" name="point">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comment">Your Comment </label>
+            <textarea class="form-control" id="comment_id" maxlength="255" minlength="5" required="required"
+                name="comment" rows="4"></textarea>
+        </div>
+        <button class="btn btn-danger mb-2">Send Comment</button>
+
+    </form>
+    {% elif session.get("dealer_id") %}
+
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        If you want to comment, please User <a class="btn btn-warning" href="{{url_for('login_page')}}"
+            role="button">Login</a>
+        If you are not registered, you can register <a class="btn btn-danger" href="{{url_for('register')}}"
+            role="button">Here</a>
+    </div>
+    {% endif %}
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1> Comments </h1>
+    {% if evas %}
+    <br><br><br>
+    {% for eva in evas %}
+
+
+    <div class="comments-list">
+        <div class="media">
+
+            <div class="media-body">
+
+                <h4 class="media-heading user_name">{{eva.user_fullname}} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                    <small>{{eva.evaluation_date}}</small></h4>
+                <p> Point : {{eva.point}} </p>
+                <p>Comment : {{eva.comment}} </p>
+
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        "There are no comments."
+    </div>
+    {% endif %}
+    <br>
+    <br><br><br><br><br><br>
+
+</div>
+
+{% endblock content %}

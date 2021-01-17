@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %} Admin User {% endblock title %}
+
+{% block content %}
+
+
+{% if users %}
+<h1>Users</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">User Id</th>
+        <th scope="col">User Name</th>
+        <th scope="col">User Mail</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr>
+        <td>{{user.user_id}}</td>
+        <td>{{user.user_fullname}}</td>
+        <td>{{user.mail}}</td>
+        
+        <td><a class="btn btn-info" href="{{url_for('admin_user_comments',user_id=user.user_id)}}" role="button">Comments</a></td>
+        <td><a class="btn btn-danger" href="{{url_for('delete_user',user_id=user.user_id)}}" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    No users
+  </div>
+{% endif %}
+
+
+<br><br>
+
+
+
+{% endblock content %}

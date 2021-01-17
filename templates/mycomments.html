@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %} {% if session.get('admin') %}
+Comments
+{% else %}
+My Comments
+{% endif %}{% endblock title %}
+
+{% block content %}
+{% if evaluations %}
+<div class="col-md-8">
+		    <div class="blog-comment">
+          {% if session.get("user_id") %}
+          <h2>Welcome {{evaluations[0].user_fullname}}</h2>
+          {% endif %}
+				<h3 class="text-success">{% if session.get('admin') %}
+          Comments
+          {% else %}
+          My Comments
+          {% endif %}</h3>
+                <hr/>
+				<ul class="list-group">
+                 {% for evaluation in evaluations %}
+                    <li class="list-group-item">
+				  
+                  <div class="card">
+                    <div class="card-header">
+                        For This Car <a href="{{url_for('ad_detail_page',ad_id=evaluation.advertisement_id)}}"><b> {{evaluation.car_brand}}  {{evaluation.car_model}} </b>  </a>    <h5 class="float-lg-right">{{evaluation.evaluation_date}} </h5> 
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><b>Point : {{evaluation.point}} </b>  </h5>
+                      <p class="card-text">{{evaluation.comment}}</p>
+                      <a href="{{url_for('delete_comment',eva_id=evaluation.evaluation_id)}}" class="btn btn-danger">Delete This Comment</a>
+                      {% if session.get('admin') %}
+
+                      {% else %}
+                      <a href="{{url_for('change_comment',eva_id=evaluation.evaluation_id)}}" class="btn btn-primary">Change This Comment</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+          
+				
+				</ul>
+			</div>
+        </div>
+        {% else  %}
+        <div class="alert alert-danger" role="alert">
+          No comments.
+        </div>
+{% endif %}
+
+{% endblock content %}
