@@ -2,10 +2,10 @@ from flask import current_app
 import mysql.connector
 
 mydb=mysql.connector.connect(
-        host="td5l74lo6615qq42.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-        user="whr9fr9iwnfehgi2",
-        password="vykbhl598vuidtpr",
-        database="o9azl93umr71v3je",
+        host="esilxl0nthgloe1y.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+        user="n7mmghi3uclxqy2w",
+        password="qaz0vvkzw8fmdh9p",
+        database="g93ov32o60ckmev5",
        	ssl_disabled=True,
 )
 
