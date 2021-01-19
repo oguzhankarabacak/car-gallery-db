@@ -46,7 +46,6 @@ def home_page():
         car_brands=request.form.getlist("car_brand")
         car_brands_array=[]
         for car in cars_:
-           # print(car.car_brand)
             car_brands_array.append(car.car_brand)
         car_brands = tuple(car_brands_array) if len(car_brands)==0 else tuple(car_brands)
         
@@ -196,7 +195,6 @@ def register():
         try:
             t=cursor.execute(query,(email,fullname,password_h))
             y=db.commit()
-         #   print("error")
             flash("You have successfully registered, you can login.","success")
             return redirect(url_for("home_page"))
         except:
@@ -220,7 +218,6 @@ def login_page():
             data_d=cursor.fetchone()
             if (data_d != None):
                 dealer_pass=data_d[6]
-              #  print("------------------",data_d)
                 if sha256_crypt.verify(password,dealer_pass) == True:
                     
                     dealer=Dealer(data_d[0],data_d[1],data_d[2],data_d[3],data_d[4],data_d[5],data_d[7],data_d[8],data_d[9],data_d[10])
@@ -265,7 +262,6 @@ def dealer_page():
     for data in datas:
         de=Dealer(data[0],data[1],data[2],data[3],data[4],data[5],data[7])
         dealers_.append(de)
-       # print(de)
     return render_template("dealer.html",dealers=dealers_)
 
 def dealer_detail_page(dealer_id):
@@ -382,7 +378,6 @@ def update_add(ad_id):
         if len(explanation)<20:
             flash("Your Explanation cannot be less than 20 character.","danger")
             return redirect(url_for('update_add',ad_id=ad_id))
-      #  print(explanation)
         query="""Update Advertisements SET car_year=%s,price=%s,explanation=%s where advertisement_id=%s"""
         cursor.execute(query,(year,price,explanation,ad_id))
         db.commit()
@@ -447,17 +442,14 @@ def my_comments():
                 where User.user_id={user_id_}""".format(user_id_=user_id)
     cursor.execute(query)
     datas=cursor.fetchall()
-   # print(datas)
     evas=[]
     for eva in datas:
         query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements inner join Car 
                 on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor2.execute(query2)
         car=cursor2.fetchone()
-      #  print(eva[0])
         eva_=Evaluation(eva[0],eva[5],eva[4],eva[1],eva[3],eva[2],car[1],car[2])
         evas.append(eva_)
-     #   print(eva[5],eva[4],eva[1],eva[3],eva[2],car[1],car[2])
     return render_template("mycomments.html",evaluations=evas)
 
 @login_required_user
@@ -466,7 +458,6 @@ def delete_comment(eva_id):
     cursor=db.cursor()
     user_id=session.get("user_id")
     query="""Select user_id from Evaluation where evaluation_id={eva_id_}""".format(eva_id_=eva_id)
-  #  print(query)
     cursor.execute(query)
     data=cursor.fetchone()
     if (data==None or data[0] != user_id) and session.get("admin") != 1:
@@ -514,10 +505,8 @@ def change_user_info():
     db=current_app.config["db"]
     cursor=db.cursor()
     query="""Select * from User where user_id={user_id_}""".format(user_id_=user_id)
-  #  print(query)
     cursor.execute(query)
     data=cursor.fetchone()
- #   print(data[2])
     if request.method=="GET":
         user_=User(user_id=user_id,mail=data[2],user_fullname=data[1],password=data[3])
         return render_template("change_info.html",user=user_)
@@ -580,13 +569,11 @@ def new_dealer():
             flash("Owner name cannot be less than 4 character.","danger")
             return redirect(url_for("new_dealer"))
         password=sha256_crypt.encrypt(request.form["password"])
-      #  print(dealer_name,mail,city,phone,password)
         db=current_app.config["db"]
         cursor=db.cursor()
         query="""Insert into Dealer(dealer_name,owner_fullname,owner_mail,dealer_city,dealer_password,dealer_phone,total_income,number_of_cars_sold,average_point) values 
                 ('{dealer_name_}','{owner_fullname_}','{mail_}','{city_}','{password_}','{phone_}',0,0,0)""".format(dealer_name_=dealer_name,owner_fullname_=owner_fullname,mail_=mail,
                 city_=city,phone_=phone,password_=password)
-      #  print(query)
         try:
             cursor.execute(query)
             db.commit()
@@ -666,10 +653,8 @@ def admin_comments():
                 on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor2.execute(query2)
         car=cursor2.fetchone()
-      #  print(eva[0])
         eva_=Evaluation(eva[0],eva[5],eva[4],eva[1],eva[3],eva[2],car[1],car[2])
         evas.append(eva_)
-     #   print(eva[5],eva[4],eva[1],eva[3],eva[2],car[1],car[2])
     return render_template("mycomments.html",evaluations=evas)
 
 
@@ -682,7 +667,6 @@ def admin_user_comments(user_id):
                 where User.user_id={user_id_}""".format(user_id_=user_id)
                 
     cursor.execute(query)
-    #print(query)
     datas=cursor.fetchall()
     evas=[]
     for eva in datas:
@@ -690,7 +674,6 @@ def admin_user_comments(user_id):
                 on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor.execute(query2)
         car=cursor.fetchone()
-     #   print(eva[0])
         eva_=Evaluation(eva[0],eva[5],eva[4],eva[1],eva[3],eva[2],car[1],car[2])
         evas.append(eva_)
     return render_template("mycomments.html",evaluations=evas)
@@ -764,12 +747,10 @@ def update_info_dealer(dealer_id):
                 cursor.execute(query)
                 data=cursor.fetchone()
                 if session.get("dealer_id") == data[0]:
-                 #   print("aynı dealer ")
                     dealer_=Dealer(dealer_id=data[0],dealer_name=data[1],owner_fullname=data[2],is_central=data[3],owner_mail=data[4],dealer_city=data[5],
                             dealer_phone=data[7])
                     return render_template("update_info_dealer.html",dealer=dealer_)
                 else:
-                 #   print("aynı dealer değil")
                     return redirect(url_for("home_page"))
             except:
                # flash("Cannot Updated 33","danger")
@@ -800,7 +781,6 @@ def update_info_dealer(dealer_id):
                     dealer_fullname_=dealer_fullname,dealer_phone_=dealer_phone,dealer_id_=dealer_id) if len(new_password) == 0 else """Update Dealer SET dealer_name='{dealer_name_}',
                     owner_fullname='{dealer_fullname_}',dealer_phone='{dealer_phone_}',dealer_password='{new_password_}' where dealer_id={dealer_id_}""".format(dealer_name_=dealer_name,
                     dealer_fullname_=dealer_fullname,dealer_phone_=dealer_phone,new_password_=sha256_crypt.encrypt(new_password),dealer_id_=dealer_id)
-          #  print(query)
             try:
                 cursor.execute(query)
                 db.commit()
