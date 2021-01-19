@@ -11,31 +11,30 @@
         <table class="table table-sm" style="padding:10px">
             <thead>
                 <tr>
-                    <th scope="col">Attribute</th>
-                    <th scope="col">Value</th>
+                    <th scope="col"><h3 class="text-success">Advertisement Detail</h3></th>
 
                 </tr>
             </thead>
             <tbody>
 
                 <tr>
-                    <th scope="row">dealer_date : </th>
+                    <th scope="row">Advertisement Date : </th>
                     <td>{{adv.date}}</td>
                 </tr>
                 <tr>
-                    <th scope="row">dealer_name : </th>
+                    <th scope="row">Dealer Name : </th>
                     <td><a href="{{ url_for('dealer_detail_page',dealer_id=adv.dealer_id)}}"
                             class="btn btn-primary">{{adv.dealer_name}}</a> </td>
 
                 </tr>
 
                 <tr>
-                    <th scope="row">dealer_city : </th>
+                    <th scope="row">Dealer City : </th>
                     <td>{{adv.city}}</td>
                 </tr>
 
                 <tr>
-                    <th scope="row">dealer_phone : </th>
+                    <th scope="row">Dealer Phone : </th>
                     <td>{{adv.dealer_phone}}</td>
                 </tr>
 
