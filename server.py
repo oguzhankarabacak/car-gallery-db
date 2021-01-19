@@ -4,13 +4,6 @@ import mysql.connector
 import dbinit
 import views
 
-# mydb=mysql.connector.connect(
-#         host="localhost",
-#         user="root",
-#         password="123456",
-#         database="car_gallery",
-#        # ssl_disabled=True,
-# )
 
 
 def create_app():
