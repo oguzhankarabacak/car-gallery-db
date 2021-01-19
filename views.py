@@ -450,8 +450,8 @@ def my_comments():
    # print(datas)
     evas=[]
     for eva in datas:
-        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements,Car 
-                where Advertisements.car_id=Car.car_id and Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
+        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements inner join Car 
+                on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor2.execute(query2)
         car=cursor2.fetchone()
       #  print(eva[0])
@@ -662,8 +662,8 @@ def admin_comments():
     datas=cursor.fetchall()
     evas=[]
     for eva in datas:
-        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements,Car 
-                where Advertisements.car_id=Car.car_id and Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
+        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements inner join Car 
+                on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor2.execute(query2)
         car=cursor2.fetchone()
       #  print(eva[0])
@@ -686,8 +686,8 @@ def admin_user_comments(user_id):
     datas=cursor.fetchall()
     evas=[]
     for eva in datas:
-        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements,Car 
-                where Advertisements.car_id=Car.car_id and Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
+        query2="""Select Advertisements.advertisement_id,Car.car_model,Car.car_brand from Advertisements inner join Car 
+                on Advertisements.car_id=Car.car_id where Advertisements.advertisement_id='{ad_id_}' """.format(ad_id_=eva[0])
         cursor.execute(query2)
         car=cursor.fetchone()
      #   print(eva[0])
@@ -871,7 +871,6 @@ def add_new_car():
             flash("Fields cannot be empty.","danger")
             return redirect(url_for("add_new_car"))
         else:
-          #  print(car_brand.lower().capitalize(),car_model.lower().capitalize(),car_type,gearbox,fuel,engine,horsepower)
             db=current_app.config["db"]
             cursor=db.cursor()
             query="""Select * from Car Where car_model='{car_model_}' and car_brand= '{car_brand_}' and car_type='{car_type_}' and gearbox='{gearbox_}' and 
@@ -879,7 +878,6 @@ def add_new_car():
                     car_type_=car_type,gearbox_=gearbox,fuel_=fuel,engine_size_=engine,horsepower_=horsepower)
             cursor.execute(query)
             data=cursor.fetchone()
-          #  print(data)
             if data != None:
                 flash("There are cars with these features in stock.")
                 return redirect(url_for("admin_page"))
